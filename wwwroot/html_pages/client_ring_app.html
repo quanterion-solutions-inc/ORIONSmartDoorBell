@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>"Smart" Ring Doorbell - ORION STEM (Summer 2024)</title>
+    
+    <!-- reference:  http://www.steves-internet-guide.com/using-javascript-mqtt-client-websockets/ -->
+    <!-- import MQTT over WebSockets Client (for real-time dashboard / sensor comm ) -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js"
+        type="text/javascript"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>   
+    
+    <link rel="stylesheet" href="client_app_styles.css">
+</head>
+
+<body>
+
+    <div class="bordered-div">
+        <img style="width:300px" src="https://orionassured.com/wp-content/uploads/2024/03/ORION-logo-2-300x71.png">
+
+        <h1> GPT-4o (AI) Powered "Smart" Door Bell </h2>
+            <h2> QSI Ring & Run STEM Camp (Summer 2024)
+        </h1>
+
+        <img src="stream.mjpg" id="camera_image">
+      
+        <div class="spinner" id="spinner" style="margin-left: 40%;"> </div>
+
+        <br />
+
+        <div class="controls">
+            <button id="camera_control">Start Camera</button>
+            <button id="listen_control">Listen</button>
+            <button id="talk_control">Talk</button>
+            <button id="gpt_control">Ask GPT</button>
+        </div>
+
+        <br>
+
+        <audio id="audioPlayer" style="display: none;" controls></audio>
+
+        <div id="response_content" style="text-align: center;">
+            <H3> Here's a description of what I see... </H3>
+        </div>
+
+        <div id="response" style="margin-left: 17%;"></div>
+    </div>
+
+    <script src="client_app.js"> </script>
+
+    <script>
+        function InitLoad() {     
+            messageDiv.innerHTML = "Click the \"Ask GPT\" button to describe the view in the camera video."
+
+            // disable page controls until subscription is complete
+            disableControls(true)
+
+            // Connect the client
+            client.connect(options);
+        }
+
+        InitLoad()
+    </script>
+</body>
+
+</html>

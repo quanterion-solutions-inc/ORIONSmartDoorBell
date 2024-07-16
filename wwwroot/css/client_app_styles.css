@@ -1,0 +1,83 @@
+H1,
+H2,
+H3 {
+    color: whitesmoke;
+}
+
+img {
+    border: 5px solid whitesmoke;
+    width: 55%;
+    height: 45%;
+    
+}
+
+#response {
+    width: 60%;
+    height: 40%;
+    border: 1px solid whitesmoke;
+    text-align: center;
+    padding: 1em;
+    color: orange;
+    font-weight: bold;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.bordered-div {
+    border: 2px solid #000;
+    background-color: green;
+    padding: 20px;
+    font-size: 18px;
+    color: #333;
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner {
+    border: 4px solid #000;
+    background-color: green;
+    padding: 20px;
+    font-size: 18px;
+    margin: 4px auto;
+
+    height: 120px;
+    width: 90%;
+
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.spinner {
+    border: 16px solid #f3f3f3;
+    /* Light grey */
+    border-top: 16px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 2s linear infinite;
+    display: none;
+    /* Initially hidden */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+button {
+    height: 40px;
+    font-size: medium;
+    font-weight: bold;
+}
