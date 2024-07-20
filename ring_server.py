@@ -33,8 +33,8 @@ class StreamingOutput(object):
 
     def write(self, buf):
         if buf.startswith(b'\xff\xd8'):
-            #new frame, copy the existing buffer's content and notify all
-            #clients it's available
+            # new frame, copy the existing buffer's content and notify all
+            # clients it's available
             self.buffer.truncate()
             with self.condition:
                 self.frame = self.buffer.getvalue()
@@ -58,9 +58,6 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             self.end_headers()
 
         elif self.path == '/index.html':
-            # if args.secure == "on":
-            #    self.path = "./wwwroot/html_pages/https_client_ring_app.html"
-            # else:
             self.path = "./wwwroot/html_pages/client_ring_app.html"     
             content = self.ReadClientApp(self.path).encode("utf-8")
             self.send_response(200)
@@ -149,6 +146,9 @@ def Open_AI_Tell_Me_Who_Is_There(base64_image):
 
     return "I dunno! Connect me to OpenAI, so I can be \"Smart!\" "
 
+    # Note: don't delete the modify or delete lines last two lines of on (153 and 154) you will need
+    # them to complete the exercise.  
+    
     # parse the "content" field from the json "message" response, "choices" array
     # choices = response.json().get("choices", [])
     # return (choices[0]['message']['content'])
@@ -190,8 +190,9 @@ def handleButtonMode():
 
 
 def handleMotionMode():
-    playDoorBellSound(doorbell_sound_file_path, (not camera.preview))
-    startCamera()
+    if not camera.preview: 
+        playDoorBellSound(doorbell_sound_file_path, (not camera.preview))
+        startCamera()
 
 
 def startCamera():
