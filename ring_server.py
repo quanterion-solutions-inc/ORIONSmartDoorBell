@@ -276,97 +276,87 @@ def on_connect(client, userdata, flags, rc, properties):
     client.subscribe(REMOTE_APP_AUDIO_DATA_TOPIC)
     print("Subscribed to topics");  
 
+if __name__ == '__main__':
 
-
-REMOTE_APP_CAMERA_ONOFF_CONTROL_TOPIC = "ring/remote_app_control/camera"
-REMOTE_DEV_CAMERA_ONOFF_CONTROL_TOPIC = "ring/local_dev_control/camera"
-
-REMOTE_APP_MICROPHONE_CONTROL_TOPIC = "ring/remote_app_control/microphone"
-REMOTE_APP_AUDIO_DATA_TOPIC = "ring/remote_app_audio_data"
-
-GPT_RESPONSE_TOPIC = "ring/gptresponse"
-GPT_REQUEST_TOPIC = "ring/gptrequest"
-
-LISTEN_AUDIO_RESPONSE_TOPIC = "ring/audioresponse"
-
-parser = argparse.ArgumentParser(description='\"Smart\" Doorbell server version v.0.9')
-# parser.add_argument('hostname', type=str, help='specify hostname or IP address')
-parser.add_argument('--mode', type=str, default="motion", help='motion | manual (\"manual\" is button activated,  \"motion\" is PIR sensor activated)')
-parser.add_argument('--secure', type=str, default="off", help='off | on (off = http on = https')
-
-
-args = parser.parse_args()
-
-HTTP_SERVER_PORT = 8000
-HTTPS_SERVER_PORT = 8001
-
-BROKER_PORT=1883
-SSL_BROKER_PORT=8883
-
-host="127.0.0.1"
-doorbell_sound_file_path = "./sounds/bell1.mp3"
-
-BUTTON_GPIO_PIN=2
-MOTION_SENSOR_GPIO_PIN=4
-
-client = paho.Client(paho.CallbackAPIVersion.VERSION2, transport="tcp")
-client.on_message = on_message;  
-client.on_connect = on_connect
-
-client.on_disconnect = on_disconnect
-
-# Initialize pygame mixer
-pygame.mixer.init()
-
-button = Button(BUTTON_GPIO_PIN)
-pir = MotionSensor(MOTION_SENSOR_GPIO_PIN)
-
-if args.mode == "motion":
-   pir.when_motion = handleMotionMode
-
-button.when_pressed =  handleButtonMode
-
-with picamera.PiCamera(resolution='1024x768', framerate=24) as camera:
-    output = StreamingOutput()
-    # camera.rotation = 180
-   
-    try:
-        ap = AudioPlayback()
-        ap.SetMQTTClient(client, LISTEN_AUDIO_RESPONSE_TOPIC)
-
-        # streaming video (web server) address and port
-        address = ('', HTTP_SERVER_PORT)
-        if args.secure == "on":
-            address = ('', HTTPS_SERVER_PORT)
-      
-        server = StreamingServer(address, StreamingHandler)   
-        
-        print("\"Smart\" Doorbell server started on port: " + str(address[1]))
-        if args.secure == "on":   
-            # 1. configure the Python HTTP server for HTTPS (TLS support)
-            # wrap the TCP socket with an SSL support, then load the certs.
-            server.socket  = ssl.wrap_socket (server.socket, 
-                keyfile="./certs/ring_server.key", 
-                certfile="./certs/ring_server.crt", 
-                server_side=True)
-
-            # uncomment to configure the MQTT python client to communicate with Broker over SSL
-            # BROKER_PORT = SSL_BROKER_PORT   # 8883 is the TLS configured Port listener in the Broker)
-            # client.tls_set("./certs/orion_ca.crt", "./certs/ring_server.crt", "./certs/ring_server.key" )
-            # host = [IO-address]
-        
-        client.connect(host, BROKER_PORT, 60)   # establish connection
-        client.loop_start()
-        print("Connected to MQTT Broker on port " + str(BROKER_PORT) + " established")
+    REMOTE_APP_CAMERA_ONOFF_CONTROL_TOPIC = "ring/remote_app_control/camera"
+    REMOTE_DEV_CAMERA_ONOFF_CONTROL_TOPIC = "ring/local_dev_control/camera"
+    REMOTE_APP_MICROPHONE_CONTROL_TOPIC = "ring/remote_app_control/microphone"
+    REMOTE_APP_AUDIO_DATA_TOPIC = "ring/remote_app_audio_data"
+    GPT_RESPONSE_TOPIC = "ring/gptresponse"
+    GPT_REQUEST_TOPIC = "ring/gptrequest"
+    LISTEN_AUDIO_RESPONSE_TOPIC = "ring/audioresponse"
  
-        server.serve_forever()
+    doorbell_sound_file_path = "./sounds/bell1.mp3"
 
-    except KeyboardInterrupt:
-        client.disconnect()
-        client.loop_stop()
+    parser = argparse.ArgumentParser(description='\"Smart\" Doorbell server version v.0.9')
+    # parser.add_argument('hostname', type=str, help='specify hostname or IP address')
+    parser.add_argument('--mode', type=str, default="motion", help='motion | manual (\"manual\" is button activated,  \"motion\" is PIR sensor activated)')
+    parser.add_argument('--secure', type=str, default="off", help='off | on (off = http on = https')
+
+    args = parser.parse_args()
+
+    HTTP_SERVER_PORT = 8000
+    HTTPS_SERVER_PORT = 8001
+    BROKER_PORT=1883
+    SSL_BROKER_PORT=8883
+
+    host="127.0.0.1"
+   
+    client = paho.Client(paho.CallbackAPIVersion.VERSION2, transport="tcp")
+    client.on_message = on_message;  
+    client.on_connect = on_connect
+    client.on_disconnect = on_disconnect
+
+    # Initialize pygame mixer
+    pygame.mixer.init()
+ 
+    BUTTON_GPIO_PIN=2
+    MOTION_SENSOR_GPIO_PIN=4
+    button = Button(BUTTON_GPIO_PIN)
+    pir = MotionSensor(MOTION_SENSOR_GPIO_PIN)
+
+    if args.mode == "motion":
+        pir.when_motion = handleMotionMode
+
+    button.when_pressed =  handleButtonMode
+
+    with picamera.PiCamera(resolution='1024x768', framerate=24) as camera:
+        output = StreamingOutput()
+        # camera.rotation = 180
+   
+        try:
+            ap = AudioPlayback()
+            ap.SetMQTTClient(client, LISTEN_AUDIO_RESPONSE_TOPIC)
+
+            # streaming video (web server) address and port
+            address = ('', HTTP_SERVER_PORT)
+            if args.secure == "on":
+                address = ('', HTTPS_SERVER_PORT)
       
-        print("MQTT broker connection shutdown")
+            server = StreamingServer(address, StreamingHandler)   
+        
+            print("\"Smart\" Doorbell server started on port: " + str(address[1]))
+            if args.secure == "on":   
+                # 1. configure the Python HTTP server for HTTPS (TLS support)
+                # wrap the TCP socket with an SSL support, then load the certs.
+                server.socket  = ssl.wrap_socket (server.socket, 
+                    keyfile="./certs/ring_server.key", 
+                    certfile="./certs/ring_server.crt", 
+                    server_side=True)
 
-        server.server_close()
-        ap.Close()
-        print("Web server shut down")
+                # uncomment to configure the MQTT python client to communicate with Broker over SSL
+                # BROKER_PORT = SSL_BROKER_PORT   # 8883 is the TLS configured Port listener in the Broker)
+                # client.tls_set("./certs/orion_ca.crt", "./certs/ring_server.crt", "./certs/ring_server.key" )
+                # host = [IO-address]
+        
+            client.connect(host, BROKER_PORT, 60)   # establish connection
+            client.loop_start()
+            print("Connected to MQTT Broker on port " + str(BROKER_PORT) + " established")
+            server.serve_forever()
+        except KeyboardInterrupt:
+            client.disconnect()
+            client.loop_stop()
+            print("MQTT broker connection shutdown")
+            server.server_close()
+            ap.Close()
+            print("Web server shut down")
