@@ -15,7 +15,6 @@ import os
 import sys
 
 import argparse
-
 import threading
 
 from audioUtils import *
@@ -206,7 +205,6 @@ def stopCamera():
         cameraControl("off")
         client.publish(REMOTE_DEV_CAMERA_ONOFF_CONTROL_TOPIC, payload="off", qos=0, retain=False)  
           
-
 
 def handleAudioTalk(msg):
     ffmpeg_process = subprocess.Popen(
