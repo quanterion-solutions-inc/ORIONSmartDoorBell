@@ -1,4 +1,9 @@
-# Objective:Build a “Smart” Doorbell from Scratch…
+# Objective (STEM Project) Build a IoT Enabled d “Smart” Doorbell
+
+<div><img src="./smartdoorbell.png" /></div>
+ 
+# Documentation:  <a href="./docs/RingandRun-Final.pdf"> Project Pdf </a>
+
 ## That will…
 - Display streaming video in a Web App when the doorbell button is pressed, or when motion is detected
 - Play a customizable doorbell chime
@@ -29,4 +34,4 @@
 - Do Great things!
 - Enjoy what you do!
 
-  <div style="text-align:center"><img src="./smartdoorbell.png" /></div>
+ 
