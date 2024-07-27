@@ -17,7 +17,7 @@
 - Network (Cyber) security protocols and tools
 - The Software you develop to make it all work
 
-# Goals 
+# Goals...
 ## Learn, Get Inspired, and Get Involved!
 - Learn about advanced technology…
 - Raspberry Pi single board computer (SBC) and common uses
@@ -28,7 +28,7 @@
 - Discover network protocols, methods, and tools for secure network communication: TCP/IP, HTTP, MQTT, PKI, HTTPS(TLS), etc.
 - Explore the latest in Artifical Intelligence by integrating OpenAI's (Chat GPT) services and models
 - 
- ## Outcomes
+ ## Outcomes:
 - Get inspired, discover your talents, perhaps go to university and pursue a high technology career.
 - Do Great things!
 - Enjoy what you do!
