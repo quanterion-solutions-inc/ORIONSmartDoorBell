@@ -13,7 +13,7 @@
 ## Using...
 - Raspberry Pi 4B running Debian-based Raspberry PI OS (Linux) 
 - Electronic components that implement the doorbell device 
-- Advanced Artificial Intelligence
+- OpenAI GPT-4o model
 - Network (Cyber) security protocols and tools
 - The Software you develop to make it all work
 
@@ -27,7 +27,7 @@
 - Explore/discover and learn programming fundamentals using: Python, JavaScript, CSS (Cascading Style Sheets), and HTML 5
 - Discover network protocols, methods, and tools for secure network communication: TCP/IP, HTTP, MQTT, PKI, HTTPS(TLS), etc.
 - Explore the latest in Artifical Intelligence by integrating OpenAI's (Chat GPT) services and models
-- 
+
  ## Outcomes:
 - Get inspired, discover your talents, perhaps go to university and pursue a high technology career.
 - Do Great things!
