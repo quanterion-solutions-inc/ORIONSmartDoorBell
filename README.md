@@ -1,5 +1,5 @@
 # STEM Objective:  
-## Build a IoT Enabled “Smart” Doorbell: <a href="./docs/RingandRun-Final.pdf"> Project pdf </a>
+## Build a IoT-enabled “Smart” Doorbell: <a href="./docs/RingandRun-Final.pdf"> Project pdf </a>
 
 <div><img src="./smartdoorbell.png" /></div>
 
