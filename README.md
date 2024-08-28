@@ -1,7 +1,7 @@
 # STEM Objective:  
 ## Build an IoT-enabled “Smart” Doorbell: <a href="./docs/RingandRun-Final.pdf"> Project pdf </a>
 
-![Alt text](./dev.pnf)
+![Alt text](./doorbell.png)
 
 ## That will...
 - Display streaming video in a Web App when the doorbell button is pressed, or when motion is detected
